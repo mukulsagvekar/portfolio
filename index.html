@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mukul Sagvekar | Data Engineering Portfolio</title>
+    <!-- Load Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind to use Inter font and define custom cyan for tech/data focus -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'accent-cyan': '#06B6D4', // Tailwind cyan-500 for a technical look
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar for a polished look in dark mode */
+        body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background-color: #06B6D4; /* Cyan scrollbar thumb */
+            border-radius: 4px;
+        }
+
+        body::-webkit-scrollbar-track {
+            background-color: #1f2937; /* Dark gray track */
+        }
+
+        /* Ensure smooth scrolling when clicking navigation links */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Removed .progress-bar and .progress-fill styles as they are no longer needed */
+    </style>
+</head>
+
+<!-- Main body with dark background and white text -->
+<body class="bg-gray-900 font-sans text-gray-200 antialiased">
+
+    <!-- HEADER & NAVIGATION (Sticky Top) -->
+    <header class="sticky top-0 z-20 bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-700/50">
+        <div class="max-w-6xl mx-auto flex justify-center md:justify-between items-center py-4 px-4">
+            <h1 class="text-2xl font-bold text-accent-cyan hidden md:block"></h1>
+            
+            <!-- Navigation Links -->
+            <nav>
+                <ul class="flex space-x-6 text-sm font-semibold">
+                    <li><a href="#about" class="hover:text-accent-cyan transition-colors duration-200">ABOUT</a></li>
+                    <!--<li><a href="#skills" class="hover:text-accent-cyan transition-colors duration-200">SKILLS</a></li> -->
+                    <li><a href="#projects" class="hover:text-accent-cyan transition-colors duration-200">PROJECTS</a></li>
+                    <li><a href="#experience" class="hover:text-accent-cyan transition-colors duration-200">EXPERIENCE</a></li>
+					<li><a href="#activities" class="hover:text-accent-cyan transition-colors duration-200">ACTIVITIES</a></li>
+                    <li><a href="#contact" class="hover:text-accent-cyan transition-colors duration-200">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- MAIN CONTENT CONTAINER (Single Column) -->
+    <div class="max-w-4xl mx-auto p-4 md:p-8 space-y-24">
+
+        <!-- HERO / INTRO SECTION -->
+        <section class="text-center pt-8">
+            <!-- 1. PROFESSIONAL PICTURE (PLACEHOLDER) -->
+            <img class="w-40 h-40 rounded-full mx-auto mb-8 object-cover border-accent-cyan shadow-xl"
+                 src="profile-pic.jpeg"
+                 alt="Your Professional Headshot">
+
+            <h1 class="text-5xl lg:text-6xl font-extrabold text-white mb-3">Mukul Sagvekar</h1>
+            <h2 class="text-2xl lg:text-3xl font-medium text-gray-400 mb-6">Data Engineer </h2>
+
+            <p class="mb-10 text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                I specialize in developing and maintaining scalable, reliable, and high-performance data pipelines, ETL/ELT jobs, designing cloud data warehousing solutions to deliver business insights and drive data-driven decision-making.
+            </p>
+
+            <!-- 2. RESUME DOWNLOAD BUTTON -->
+            <a href="Mukul_Sagvekar_Resume.pdf" download="Mukul_Sagvekar_Resume.pdf"
+               class="inline-block px-8 py-3 text-xl font-bold text-gray-900 bg-accent-cyan rounded-lg shadow-2xl hover:bg-cyan-400 transition-colors duration-300 transform hover:scale-[1.05] active:scale-100 ring-4 ring-cyan-500/50">
+                Download Resume (PDF)
+            </a>
+        </section>
+
+        <!-- 1. ABOUT ME -->
+        <section id="about" class="pt-8 border-t border-gray-800">
+            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">About Me</h3>
+            <div class="space-y-6 text-lg leading-relaxed text-gray-300">
+                <p>
+                    I have 4 years of experience working as a data engineer. My expertise covers the full data lifecycle, from designing data models, strategy to ingest and transform data efficiently, optimizing complex data systems, building Slowly Changing Dimensions Type 2 (SCD Type 2) data pipeline to enable accurate historical reporting.
+                </p>
+            </div>
+        </section>
+
+        <!-- 3. SKILLS & TOOLS (Enhanced for Data Engineer focus) 
+        <section id="skills" class="pt-8 border-t border-gray-800">
+            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Technical Expertise</h3>
+
+            <div class="space-y-8">
+                <!-- Group 1: Programming & Core Languages (Simplified)
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4">Programming & Processing</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">AWS (S3, Lambda, Glue)</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Airflow / Prefect</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Terraform / Docker</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kubernetes</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kafka / Kinesis</span>
+                    </div>
+                </div>
+
+                <!-- Group 2: Cloud & Infrastructure (Tags remain the same) 
+                <div>
+                    <h4 class="text-2xl font-semibold text-white mb-4 mt-8">Cloud, Orchestration & DevOps</h4>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">AWS (S3, Lambda, Glue)</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Airflow / Prefect</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Terraform / Docker</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kubernetes</span>
+                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kafka / Kinesis</span>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- 4. PROJECTS (Emphasizing Technical Stack and Impact) -->
+        <section id="projects" class="pt-8 border-t border-gray-800">
+            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Data Projects</h3>
+            
+            <!-- Project 1 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
+                <!-- Project Image Placeholder -->
+                <img src="nyc-taxi-data-arch.png" 
+                     alt="Project Titan architecture diagram" 
+                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
+
+                <h4 class="text-2xl font-bold text-white mb-2">NYC Taxi Data Analysis</h4>
+                <p class="text-sm text-gray-400 mb-4 font-mono">
+                    <span class="text-accent-cyan">STACK:</span> AWS Lambda, AWS S3, Snowflake, dbt, Tableau, SQL, Python.
+                </p>
+                <p class="text-gray-300 mb-4">
+					Architected a snowflake schema data model and built end-to-end data pipeline to analyze 3.1M NYC Taxi trips, delivering dashboards for trip demand forecasting and fare insights.
+                </p>
+                
+                <!-- Impact Metric Highlight 
+                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
+                    <p class="text-sm font-semibold text-accent-cyan">
+                        &uarr; Latency reduced by **85%** (from 15 min to under 2 min)
+                    </p>
+                </div> -->
+                <a href="https://github.com/mukulsagvekar/nyc-taxi" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
+				<a href="https://public.tableau.com/app/profile/mukul6401/viz/NYCTaxiDataAnalysis_17004981471090/Dashboard1" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
+                <!-- Project Image Placeholder -->
+                <img src="trending-youtube-stats-arch.png" 
+                     alt="ELT Dashboard screenshot" 
+                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
+
+                <h4 class="text-2xl font-bold text-white mb-2">Trending Youtube Video Statistics</h4>
+                <p class="text-sm text-gray-400 mb-4 font-mono">
+                    <span class="text-accent-cyan">STACK: </span> AWS, Snowflake, Tableau, SQL.
+                </p>
+                <p class="text-gray-300 mb-4">
+                    Crafted a data pipeline to process 13 years data using AWS and Snowflake, with data visualization in Tableau.
+                </p>
+                
+                <!-- Impact Metric Highlight 
+                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
+                    <p class="text-sm font-semibold text-accent-cyan">
+                        &darr; Operational Cost reduced by **30%** monthly
+                    </p>
+                </div> -->
+				<a href="https://github.com/mukulsagvekar/trending-youtube-videos-stats" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
+				<a href="https://public.tableau.com/app/profile/mukul6401/viz/TrendingYoutubeVideosStats/Dashboard1?publish=yes" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
+            </div>
+			
+			<!-- Project 3 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
+                <!-- Project Image Placeholder -->
+                <img src="movie-recommendation.png" 
+                     alt="ELT Dashboard screenshot" 
+                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
+
+                <h4 class="text-2xl font-bold text-white mb-2">Movie Recommendation System</h4>
+                <p class="text-sm text-gray-400 mb-4 font-mono">
+                    <span class="text-accent-cyan">STACK: </span> Python, Pandas, Numpy, Unsupervised Learning, Collaborative Filtering.
+                </p>
+                <p class="text-gray-300 mb-4">
+                    Engineered a movie recommendation system using collaborative filtering with KNN algorithm and cosine similarity.
+                </p>
+                
+                <!-- Impact Metric Highlight 
+                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
+                    <p class="text-sm font-semibold text-accent-cyan">
+                        &darr; Operational Cost reduced by **30%** monthly
+                    </p>
+                </div> -->
+				<a href="https://github.com/mukulsagvekar/MovieRecommendationSystem" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
+            </div>
+        </section>
+
+        <!-- 2. EXPERIENCE -->
+        <section id="experience" class="pt-8 border-t border-gray-800">
+            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Professional Experience</h3>
+
+            <!-- Job 1 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition-shadow duration-300 border-l-4 border-cyan-500">
+                <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Aug 2023 — Dec 2024</p>
+                <h4 class="text-xl font-semibold text-white">Data Engineer</h4>
+                <p class="text-accent-cyan mb-4">Happiest Minds, India</p>
+				<p>Worked on large-scale data engineering projects across retail and digital engagement domains. Designed normalized and dimensional data models for advanced analytics and reporting. Built and maintained ELT pipelines integrating data from 8+ sources. Developed serverless, near real-time pipelines for traffic and engagement data, improving insights and automated customer journey reports.</p>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition-shadow duration-300 border-l-4 border-cyan-500">
+                <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Jan 2021 — Aug 2023</p>
+                <h4 class="text-xl font-semibold text-white">Data Engineering Analyst</h4>
+                <p class="text-accent-cyan mb-4">Accenture, India</p>
+                <p>As a data engineer, successfully led migration from AWS to Snowflake. Designed, developed and maintained scalable data pipelines using Jenkins, AWS services and Snowflake following best practices. Collaborated with cross-functional teams to develop a POC. Following Agile methodology for development.</p>
+            </div>
+        </section>
+
+
+        <!-- 5. EXTRA-CURRICULAR ACTIVITIES (Updated image size and shape) -->
+        <section id="activities" class="pt-8 border-t border-gray-800">
+            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Extra-Curricular Activities And Community Impact</h3>
+            <div class="space-y-6">
+                <!-- Activity 1 -->
+                <div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
+                    <img src="EOM.jpeg" 
+                         alt="Mentorship Icon" 
+                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
+                    
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">Facility Lead At Campus Recreation Center</h4>
+                        <p class="text-accent-cyan">Apr 2025 - Present</p>
+                        <p class="text-gray-300 mt-1">
+                            Oversaw the daily operations of the recreation center, assisted students, faculty, and staff with inquiries regarding the center, managing bookings for events.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Activity 2 -->
+                <div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
+                    <img src="5k.png" 
+                         alt="Club Icon" 
+                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
+
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">2025 UIS Prairie Stars 5K</h4>
+                        <p class="text-accent-cyan">Sept 2025</p>
+                        <p class="text-gray-300 mt-1">
+                            Completed the 5K with a personal best time of 26.27 minutes, achieving 3rd position in my age category, demonstrating my commitment, discipline, and ability to push boundaries.
+                        </p>
+                    </div>
+                </div>
+				
+				<!-- Activity 3 -->
+				<div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
+                    <img src="aarohan.jpg" 
+                         alt="Club Icon" 
+                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
+
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">MITWPU Aarohan Cultural Fest</h4>
+                        <p class="text-accent-cyan">Feb 2019</p>
+                        <p class="text-gray-300 mt-1">
+                            Organized and coordinated the college cultural festival - MITWPU Aarohan. As a part of core organizing members, lead the sponsorship and publicity team.
+                        </p>
+                    </div>
+                </div>
+				
+				<!-- Activity 4 -->
+				<div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
+                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
+                    <img src="run-for-a-cause.jpg" 
+                         alt="Club Icon" 
+                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
+
+                    <div>
+                        <h4 class="text-xl font-semibold text-white">MITWPU Run For A Cause Marathon</h4>
+                        <p class="text-accent-cyan">Jan 2018</p>
+                        <p class="text-gray-300 mt-1">
+                            Organized and coordinated Run for a Cause Marathon, which witnessed more than 700 participants.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. CONTACT ME -->
+            <section id="contact" class="pt-8 mb-20 border-t border-gray-800">
+                <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Contact & Connect</h3>
+                <p class="text-lg leading-relaxed mb-8 text-gray-300">
+                    I'm currently seeking challenging Data Engineering roles. Let's connect to discuss how I can contribute to your data infrastructure goals.
+                </p>
+
+                <div class="space-y-4">
+                    <a href="mailto:mukul.sagvekar@gmail.com" class="flex items-center text-white hover:text-accent-cyan transition-colors duration-200 text-lg">
+                        <svg class="w-6 h-6 mr-3 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        mukul.sagvekar@gmail.com
+                    </a>
+                    <a href="https://www.linkedin.com/in/mukulsagvekar/" class="flex items-center text-white hover:text-accent-cyan transition-colors duration-200 text-lg">
+                        <svg class="w-6 h-6 mr-3 text-accent-cyan" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.51-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        mukulsagvekar
+                    </a>
+                </div>
+            </section>
+
+            <footer class="text-center text-gray-600 text-sm py-8 border-t border-gray-800">
+                <p>Designed with a focus on data clarity and structure.</p>
+            </footer>
+    </div>
+
+</body>
+</html>
