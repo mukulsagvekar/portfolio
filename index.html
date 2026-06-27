@@ -192,6 +192,25 @@
 			<!-- Project 1 -->
             <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
                 <!-- Project Image Placeholder -->
+                <img src="multimodal-rag.png" 
+                     alt="" 
+                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
+
+                <h4 class="text-2xl font-bold text-white mb-2">Multimodal RAG</h4>
+                <p class="text-sm text-gray-400 mb-4 font-mono">
+                    <span class="text-accent-cyan">STACK:</span> Python, Streamlit, CLIP, BGE, FAISS, Groq.
+                </p>
+                <p class="text-gray-300 mb-4">
+					Built a multimodal Retrieval-Augmented Generation (RAG) app that lets users upload a PDF and ask questions — getting answers with inline citations pointing to specific pages. The pipeline uses two separate embedding strategies: BGE (bge-small-en-v1.5) for semantic text retrieval and CLIP (ViT-B/32) for image-based page retrieval, each backed by its own FAISS index. At query time, results from both indexes are score-normalized and merged so text passages and visual pages compete fairly in a single ranked list. Groq's llama-3.3-70b generates the final answer with [Source N] citations, and retrieved page images are shown as thumbnails in the Sources expander — letting users see the exact chart or diagram the model referenced. The entire ingestion pipeline runs locally with no API calls, keeping costs at zero. Deployed on Streamlit Community Cloud.
+                </p>
+                
+                <a href="https://github.com/mukulsagvekar/multi-modal-rag" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
+				<a href="https://multi-modal-rag-wqhuxf3aw29t9jpgpa6p5y.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
+            </div>
+			
+			<!-- Project 2 -->
+            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
+                <!-- Project Image Placeholder -->
                 <img src="job-site-performance-dashboard.png" 
                      alt="" 
                      class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
@@ -204,42 +223,30 @@
 					An end-to-end data pipeline that transforms construction permit filings into operational insights, built on Snowflake using dbt with a medallion architecture. The project includes a Cortex Analyst semantic layer that lets users ask questions like "which borough has the most at-risk jobs?" in plain English and get instant answers. The interactive dashboard covering pipeline stages, cost analysis and an at-risk project tracker is deployed live on Streamlit Cloud.
                 </p>
                 
-                <!-- Impact Metric Highlight 
-                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
-                    <p class="text-sm font-semibold text-accent-cyan">
-                        &uarr; Latency reduced by **85%** (from 15 min to under 2 min)
-                    </p>
-                </div> -->
                 <a href="https://github.com/mukulsagvekar/job-site-performance" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
 				<a href="https://job-site-performance-5fkmdc7wnatvrecrzht5rk.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
             </div>
 			
-			<!-- Project 2 -->
+			<!-- Project 3 -->
             <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
                 <!-- Project Image Placeholder -->
-                <img src="nyc-taxi-demand-forecast.png" 
+                <img src="mobilityIQ.png" 
                      alt="" 
                      class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
 
-                <h4 class="text-2xl font-bold text-white mb-2">NYC Taxi Demand Forecasting</h4>
+                <h4 class="text-2xl font-bold text-white mb-2">MobilityIQ – Taxi Demand Forecasting & Analytics Platform</h4>
                 <p class="text-sm text-gray-400 mb-4 font-mono">
                     <span class="text-accent-cyan">STACK:</span> AWS Lambda, AWS S3, Snowflake, dbt, Streamlit, SQL, Python, LightGBM model.
                 </p>
                 <p class="text-gray-300 mb-4">
 					An end-to-end taxi demand forecasting and analytics platform built on AWS, Snowflake, and dbt. A LightGBM model predicts hourly trip demand across 263 zones for a 7-day horizon using lag, rolling, and calendar features extracted from 4.4M+ trip records. The platform extends beyond forecasting with a Snowflake Cortex Analyst semantic layer, letting users query demand, revenue, and seasonality data in plain English through a Streamlit dashboard.
                 </p>
-                
-                <!-- Impact Metric Highlight 
-                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
-                    <p class="text-sm font-semibold text-accent-cyan">
-                        &uarr; Latency reduced by **85%** (from 15 min to under 2 min)
-                    </p>
-                </div> -->
+
                 <a href="https://github.com/mukulsagvekar/nyc-taxi-demand-forecast" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
 				<a href="https://nyc-taxi-demand-forecast-happzg759c7qzkbmfvruuyf.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
             </div>
 			
-            <!-- Project 3 -->
+            <!-- Project 4 -->
             <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
                 <!-- Project Image Placeholder -->
                 <img src="nyc-taxi-data-arch.png" 
@@ -253,65 +260,12 @@
                 <p class="text-gray-300 mb-4">
 					Architected a snowflake schema data model and built end-to-end data pipeline to analyze 3.1M NYC Taxi trips, delivering dashboards for trip demand forecasting and fare insights.
                 </p>
-                
-                <!-- Impact Metric Highlight 
-                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
-                    <p class="text-sm font-semibold text-accent-cyan">
-                        &uarr; Latency reduced by **85%** (from 15 min to under 2 min)
-                    </p>
-                </div> -->
+
                 <a href="https://github.com/mukulsagvekar/nyc-taxi" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
 				<a href="https://public.tableau.com/app/profile/mukul6401/viz/NYCTaxiDataAnalysis_17004981471090/Dashboard1" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
             </div>
 
-            <!-- Project 4 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder -->
-                <img src="trending-youtube-stats-arch.png" 
-                     alt="ELT Dashboard screenshot" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">Trending Youtube Video Statistics</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK: </span> AWS, Snowflake, Tableau, SQL.
-                </p>
-                <p class="text-gray-300 mb-4">
-                    Crafted a data pipeline to process 13 years data using AWS and Snowflake, with data visualization in Tableau.
-                </p>
-                
-                <!-- Impact Metric Highlight 
-                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
-                    <p class="text-sm font-semibold text-accent-cyan">
-                        &darr; Operational Cost reduced by **30%** monthly
-                    </p>
-                </div> -->
-				<a href="https://github.com/mukulsagvekar/trending-youtube-videos-stats" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-				<a href="https://public.tableau.com/app/profile/mukul6401/viz/TrendingYoutubeVideosStats/Dashboard1?publish=yes" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
-            </div>
-			
-			<!-- Project 5 
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder 
-                <img src="movie-recommendation.png" 
-                     alt="ELT Dashboard screenshot" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">Movie Recommendation System</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK: </span> Python, Pandas, Numpy, Unsupervised Learning, Collaborative Filtering.
-                </p>
-                <p class="text-gray-300 mb-4">
-                    Engineered a movie recommendation system using collaborative filtering with KNN algorithm and cosine similarity.
-                </p>
-                
-                <!-- Impact Metric Highlight 
-                <div class="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg inline-block">
-                    <p class="text-sm font-semibold text-accent-cyan">
-                        &darr; Operational Cost reduced by **30%** monthly
-                    </p>
-                </div> 
-				<a href="https://github.com/mukulsagvekar/MovieRecommendationSystem" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-            </div> -->
+            
         </section>
 
         <!-- 2. EXPERIENCE -->
