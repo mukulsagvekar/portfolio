@@ -1,387 +1,643 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mukul Sagvekar | Data Engineering Portfolio</title>
-    <!-- Load Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Configure Tailwind to use Inter font and define custom cyan for tech/data focus -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        'accent-cyan': '#06B6D4', // Tailwind cyan-500 for a technical look
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* Custom scrollbar for a polished look in dark mode */
-        body::-webkit-scrollbar {
-            width: 8px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mukul Sagvekar — Data Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body::-webkit-scrollbar-thumb {
-            background-color: #06B6D4; /* Cyan scrollbar thumb */
-            border-radius: 4px;
-        }
+    :root {
+      --bg:      #060A12;
+      --surface: #0C1220;
+      --raised:  #101828;
+      --border:  rgba(255,255,255,0.07);
+      --cyan:    #22D3EE;
+      --cyan-lo: rgba(34,211,238,0.08);
+      --text:    #E2EAF4;
+      --muted:   #7A90A8;
+      --faint:   #3E5068;
+      --green:   #34D399;
+      --mono:    'DM Mono', monospace;
+    }
 
-        body::-webkit-scrollbar-track {
-            background-color: #1f2937; /* Dark gray track */
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Ensure smooth scrolling when clicking navigation links */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Removed .progress-bar and .progress-fill styles as they are no longer needed */
-    </style>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+    }
+
+    .glow-orb {
+      position: fixed; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px; border-radius: 50%;
+      background: radial-gradient(ellipse, rgba(34,211,238,0.08) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--faint); border-radius: 2px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 0 2rem;
+      background: rgba(6,10,18,0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1000px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand { font-family: var(--mono); font-size: 13px; color: var(--cyan); letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .page { position: relative; z-index: 1; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 1.5rem 5rem;
+      max-width: 760px; margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; color: var(--cyan);
+      border: 1px solid rgba(34,211,238,0.3); border-radius: 999px;
+      padding: 5px 14px; margin-bottom: 2rem; background: var(--cyan-lo);
+    }
+    .hero-badge .pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.85)} }
+    .avatar-ring {
+      position: relative; display: inline-block;
+      width: 108px; height: 108px; margin-bottom: 2rem;
+    }
+    .avatar-ring::before {
+      content: ''; position: absolute; inset: -4px; border-radius: 50%;
+      background: conic-gradient(var(--cyan), rgba(34,211,238,0.1), var(--cyan));
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-ring img {
+      position: relative; z-index: 1;
+      width: 108px; height: 108px; border-radius: 50%; object-fit: cover;
+      border: 3px solid var(--bg); background: var(--raised);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 58px); font-weight: 300;
+      letter-spacing: -0.035em; color: var(--text); margin-bottom: 0.5rem; line-height: 1.1;
+    }
+    .hero h1 strong { font-weight: 500; }
+    .hero-role { font-family: var(--mono); font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; letter-spacing: 0.06em; }
+    .hero-desc { font-size: 16px; color: var(--muted); line-height: 1.85; max-width: 540px; margin: 0 auto 2.5rem; font-weight: 300; }
+    .hero-actions { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      text-decoration: none; transition: all 0.2s; letter-spacing: 0.02em;
+    }
+    .btn-primary { background: var(--cyan); color: var(--bg); }
+    .btn-primary:hover { background: #67E8F9; }
+    .btn-ghost { border: 1px solid var(--border); color: var(--muted); background: transparent; }
+    .btn-ghost:hover { border-color: var(--faint); color: var(--text); }
+    .btn svg { width: 15px; height: 15px; }
+
+    /* SECTIONS */
+    .section { padding: 6rem 1.5rem; max-width: 1000px; margin: 0 auto; }
+    .section-head { margin-bottom: 3rem; }
+    .section-eyebrow { font-family: var(--mono); font-size: 11px; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+    .section-title { font-size: 30px; font-weight: 400; letter-spacing: -0.025em; color: var(--text); }
+    .divider { border: none; border-top: 1px solid var(--border); max-width: 1000px; margin: 0 auto; }
+
+    /* ABOUT */
+    .about-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.1rem 1.25rem; }
+    .stat-label { font-family: var(--mono); font-size: 10px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+    .stat-value { font-size: 14px; font-weight: 500; color: var(--text); }
+    .stat-value.green { color: var(--green); }
+    .skills-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+    .skill { font-family: var(--mono); font-size: 11px; padding: 4px 12px; border-radius: 5px; border: 1px solid rgba(34,211,238,0.2); color: rgba(34,211,238,0.8); background: var(--cyan-lo); letter-spacing: 0.02em; }
+    .about-text { font-size: 15px; color: var(--muted); line-height: 1.85; font-weight: 300; }
+    .about-text p + p { margin-top: 1rem; }
+
+    /* PROJECTS — alternating left/right */
+    .projects-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .project-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border); border-radius: 14px;
+      overflow: hidden; background: var(--surface);
+      transition: border-color 0.25s;
+    }
+    .project-row:hover { border-color: rgba(34,211,238,0.25); }
+    .project-row.flip { direction: rtl; }
+    .project-row.flip > * { direction: ltr; }
+
+    .project-img-wrap {
+      overflow: hidden;
+      min-height: 260px;
+      background: var(--raised);
+    }
+    .project-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: scale-down; object-position: center;
+      display: block;
+      transition: transform 0.4s ease, filter 0.3s;
+      filter: brightness(0.85) saturate(0.9);
+    }
+    .project-row:hover .project-img-wrap img {
+      transform: scale(1.03);
+      filter: brightness(1) saturate(1);
+    }
+
+    .project-content { padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
+    .proj-num { font-family: var(--mono); font-size: 11px; color: var(--faint); margin-bottom: 0.75rem; }
+    .proj-title { font-size: 19px; font-weight: 500; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .proj-stack { font-family: var(--mono); font-size: 11px; color: var(--cyan); opacity: 0.75; margin-bottom: 1rem; }
+    .proj-desc { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 1rem; font-weight: 300; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.25rem; }
+    .proj-tag {
+      font-size: 11px; padding: 3px 10px; border-radius: 4px;
+      background: rgba(34,211,238,0.06); border: 1px solid rgba(34,211,238,0.15);
+      color: rgba(34,211,238,0.7); font-family: var(--mono);
+    }
+    .proj-links { display: flex; gap: 1.25rem; }
+    .proj-link {
+      font-size: 12px; color: var(--cyan); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 5px;
+      letter-spacing: 0.03em; opacity: 0.75; transition: opacity 0.2s;
+    }
+    .proj-link:hover { opacity: 1; }
+    .proj-link svg { width: 13px; height: 13px; stroke: currentColor; fill: none; flex-shrink: 0; }
+
+    /* EXPERIENCE */
+    .exp-list { position: relative; }
+    .exp-list::before {
+      content: ''; position: absolute;
+      left: 11px; top: 12px; bottom: 12px; width: 1px;
+      background: linear-gradient(to bottom, var(--cyan), transparent); opacity: 0.2;
+    }
+    .exp-item { display: flex; gap: 2rem; padding: 0 0 3rem; }
+    .exp-item:last-child { padding-bottom: 0; }
+    .exp-dot-col { flex-shrink: 0; padding-top: 5px; }
+    .exp-dot { width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(34,211,238,0.35); background: var(--bg); display: flex; align-items: center; justify-content: center; }
+    .exp-dot-inner { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); }
+    .exp-meta { font-family: var(--mono); font-size: 11px; color: var(--faint); margin-bottom: 0.5rem; }
+    .exp-role { font-size: 18px; font-weight: 500; color: var(--text); margin-bottom: 0.2rem; }
+    .exp-company { font-size: 13px; color: var(--cyan); opacity: 0.8; margin-bottom: 0.75rem; }
+    .exp-desc { font-size: 14px; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+    /* ACTIVITIES */
+    .activities-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .activity-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden; transition: border-color 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .activity-card:hover { border-color: rgba(34,211,238,0.2); }
+    .activity-img-wrap { width: 100%; height: 155px; overflow: hidden; flex-shrink: 0; }
+    .activity-card img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+      display: block;
+      filter: brightness(0.8) saturate(0.8);
+      transition: transform 0.35s ease, filter 0.3s;
+    }
+    .activity-card:hover img { transform: scale(1.04); filter: brightness(0.95) saturate(1); }
+    .activity-body { padding: 1.1rem 1.25rem; flex: 1; }
+    .activity-date { font-family: var(--mono); font-size: 11px; color: var(--cyan); opacity: 0.75; margin-bottom: 0.4rem; }
+    .activity-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 0.4rem; }
+    .activity-desc { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    /* CONTACT */
+    .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .contact-headline { font-size: 36px; font-weight: 300; letter-spacing: -0.03em; color: var(--text); line-height: 1.2; }
+    .contact-headline em { font-style: italic; color: var(--cyan); }
+    .contact-sub { margin-top: 1rem; font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem 1.25rem; text-decoration: none; transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: rgba(34,211,238,0.25); }
+    .cl-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--cyan-lo); border: 1px solid rgba(34,211,238,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cl-icon svg { width: 17px; height: 17px; stroke: var(--cyan); fill: none; }
+    .cl-label { font-family: var(--mono); font-size: 10px; color: var(--faint); text-transform: uppercase; letter-spacing: 0.1em; }
+    .cl-value { font-size: 13px; color: var(--text); margin-top: 2px; }
+
+    footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: 0.06em; }
+
+    @media (max-width: 720px) {
+      .about-layout { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 1fr; }
+      .project-row.flip { direction: ltr; }
+      .project-img-wrap { min-height: 200px; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .nav-brand { display: none; }
+      .nav-links { gap: 1.25rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
 </head>
+<body>
 
-<!-- Main body with dark background and white text -->
-<body class="bg-gray-900 font-sans text-gray-200 antialiased">
+<div class="glow-orb" aria-hidden="true"></div>
 
-    <!-- HEADER & NAVIGATION (Sticky Top) -->
-    <header class="sticky top-0 z-20 bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-700/50">
-        <div class="max-w-6xl mx-auto flex justify-center md:justify-between items-center py-4 px-4">
-            <h1 class="text-2xl font-bold text-accent-cyan hidden md:block"></h1>
-            
-            <!-- Navigation Links -->
-            <nav>
-                <ul class="flex space-x-6 text-sm font-semibold">
-                    <li><a href="#about" class="hover:text-accent-cyan transition-colors duration-200">ABOUT</a></li>
-                    <!--<li><a href="#skills" class="hover:text-accent-cyan transition-colors duration-200">SKILLS</a></li> -->
-                    <li><a href="#projects" class="hover:text-accent-cyan transition-colors duration-200">PROJECTS</a></li>
-                    <li><a href="#experience" class="hover:text-accent-cyan transition-colors duration-200">EXPERIENCE</a></li>
-					<li><a href="#activities" class="hover:text-accent-cyan transition-colors duration-200">ACTIVITIES</a></li>
-                    <li><a href="#contact" class="hover:text-accent-cyan transition-colors duration-200">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<nav aria-label="Primary navigation">
+  <div class="nav-inner">
+    <span class="nav-brand">mukul.sagvekar</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
+<div class="page">
 
-    <!-- MAIN CONTENT CONTAINER (Single Column) -->
-    <div class="max-w-4xl mx-auto p-4 md:p-8 space-y-24">
-
-        <!-- HERO / INTRO SECTION -->
-        <section class="text-center pt-8">
-            <!-- 1. PROFESSIONAL PICTURE (PLACEHOLDER) -->
-            <img class="w-40 h-40 rounded-full mx-auto mb-8 object-cover border-accent-cyan shadow-xl"
-                 src="profilepic.png"
-                 alt="Your Professional Headshot">
-
-            <h1 class="text-5xl lg:text-6xl font-extrabold text-white mb-3">Mukul Sagvekar</h1>
-            <h2 class="text-2xl lg:text-3xl font-medium text-gray-400 mb-6">Data Engineer </h2>
-
-            <p class="mb-10 text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                I specialize in developing and maintaining scalable, reliable, and high-performance data pipelines, ETL/ELT jobs, designing cloud data warehousing solutions to deliver business insights and drive data-driven decision-making.
-            </p>
-			
-			
-					
-            <!-- 2. RESUME DOWNLOAD BUTTON
-            <a href="Mukul_Sagvekar_Resume.pdf" download="Mukul_Sagvekar_Resume.pdf"
-               class="inline-block px-8 py-3 text-xl font-bold text-gray-900 bg-accent-cyan rounded-lg shadow-2xl hover:bg-cyan-400 transition-colors duration-300 transform hover:scale-[1.05] active:scale-100 ring-4 ring-cyan-500/50">
-                Download Resume (PDF)
-            </a> -->
-			<div class="flex justify-center space-x-6 mt-4">
-			  <!-- Gmail -->
-			  <a href="mailto:mukul.sagvekar@gmail.com" target="_blank"
-				 class="text-cyan-400 hover:text-cyan-300 transition-colors duration-200">
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-						d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-				</svg>
-			  </a>
-
-			  <!-- LinkedIn -->
-			  <a href="https://www.linkedin.com/in/mukul-sagvekar" target="_blank"
-				 class="text-cyan-400 hover:text-cyan-300 transition-colors duration-200">
-				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-				  <path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 
-						   5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zm-11 
-						   19H5V9h3v10zM6.5 7.5C5.57 7.5 4.8 6.73 4.8 
-						   5.8S5.57 4.1 6.5 4.1s1.7.77 1.7 1.7-.77 1.7-1.7 
-						   1.7zm12.5 11.5h-3v-5.2c0-1.24-.45-2.1-1.58-2.1-0.86 
-						   0-1.38.58-1.6 1.13-.08.19-.1.46-.1.73V19h-3s.04-8.46 
-						   0-9.9h3v1.4c.4-.62 1.1-1.52 2.67-1.52 1.95 
-						   0 3.43 1.28 3.43 4.02V19z"/>
-				</svg>
-			  </a>
-
-			  <!-- GitHub -->
-			  <a href="https://github.com/mukulsagvekar" target="_blank"
-				 class="text-cyan-400 hover:text-cyan-300 transition-colors duration-200">
-				<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-				  <path fill-rule="evenodd" clip-rule="evenodd"
-						d="M12 2C6.48 2 2 6.58 2 12.26c0 4.51 2.87 
-						   8.33 6.84 9.68.5.09.68-.22.68-.48 
-						   0-.24-.01-.87-.01-1.7-2.78.61-3.37-1.36-3.37-1.36
-						   -.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 
-						   1 .07 1.52 1.04 1.52 1.04.9 1.57 2.37 1.12 2.95.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.15-4.56-5.14 
-						   0-1.14.39-2.08 1.03-2.81-.1-.26-.45-1.32.1-2.74 
-						   0 0 .84-.27 2.75 1.03A9.42 9.42 0 0112 7.11c.85.01 
-						   1.71.12 2.51.35 1.9-1.3 2.74-1.03 2.74-1.03.55 1.42.2 
-						   2.48.1 2.74.64.73 1.03 1.67 1.03 2.81 0 4-2.35 
-						   4.87-4.58 5.13.36.32.68.94.68 1.9 0 1.37-.01 
-						   2.47-.01 2.81 0 .26.18.58.69.48A10.02 10.02 
-						   0 0022 12.26C22 6.58 17.52 2 12 2z"/>
-				</svg>
-			  </a>
-			  
-			  
-			</div>
-
-			
-        </section>
-
-        <!-- 1. ABOUT ME -->
-        <section id="about" class="pt-8 border-t border-gray-800">
-            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">About Me</h3>
-            <div class="space-y-6 text-lg leading-relaxed text-gray-300">
-                <p>
-                    I have 4 years of experience working as a data engineer. My expertise covers the full data lifecycle, from designing data models, strategy to ingest and transform data efficiently, optimizing complex data systems, building Slowly Changing Dimensions Type 2 (SCD Type 2) data pipeline to enable accurate historical reporting.
-                </p>
-            </div>
-        </section>
-
-        <!-- 3. SKILLS & TOOLS (Enhanced for Data Engineer focus) 
-        <section id="skills" class="pt-8 border-t border-gray-800">
-            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Technical Expertise</h3>
-
-            <div class="space-y-8">
-                <!-- Group 1: Programming & Core Languages (Simplified)
-                <div>
-                    <h4 class="text-2xl font-semibold text-white mb-4">Programming & Processing</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">AWS (S3, Lambda, Glue)</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Airflow / Prefect</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Terraform / Docker</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kubernetes</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kafka / Kinesis</span>
-                    </div>
-                </div>
-
-                <!-- Group 2: Cloud & Infrastructure (Tags remain the same) 
-                <div>
-                    <h4 class="text-2xl font-semibold text-white mb-4 mt-8">Cloud, Orchestration & DevOps</h4>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">AWS (S3, Lambda, Glue)</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Airflow / Prefect</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Terraform / Docker</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kubernetes</span>
-                        <span class="bg-gray-800 text-accent-cyan px-4 py-1.5 rounded-md text-sm font-medium border border-cyan-800/50 shadow-md">Kafka / Kinesis</span>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-
-        <!-- 4. PROJECTS (Emphasizing Technical Stack and Impact) -->
-        <section id="projects" class="pt-8 border-t border-gray-800">
-            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Data Projects</h3>
-            
-			<!-- Project 1 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder -->
-                <img src="multimodal-rag.png" 
-                     alt="" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">Multimodal RAG</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK:</span> Python, Streamlit, CLIP, BGE, FAISS, Groq.
-                </p>
-                <p class="text-gray-300 mb-4">
-					Built a multimodal Retrieval-Augmented Generation (RAG) app that lets users upload a PDF and ask questions — getting answers with inline citations pointing to specific pages. The pipeline uses two separate embedding strategies: BGE (bge-small-en-v1.5) for semantic text retrieval and CLIP (ViT-B/32) for image-based page retrieval, each backed by its own FAISS index. At query time, results from both indexes are score-normalized and merged so text passages and visual pages compete fairly in a single ranked list. Groq's llama-3.3-70b generates the final answer with [Source N] citations, and retrieved page images are shown as thumbnails in the Sources expander — letting users see the exact chart or diagram the model referenced. The entire ingestion pipeline runs locally with no API calls, keeping costs at zero. Deployed on Streamlit Community Cloud.
-                </p>
-                
-                <a href="https://github.com/mukulsagvekar/multi-modal-rag" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-				<a href="https://multi-modal-rag-wqhuxf3aw29t9jpgpa6p5y.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
-            </div>
-			
-			<!-- Project 2 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder -->
-                <img src="job-site-performance-dashboard.png" 
-                     alt="" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">SiteSignal — Job Site Performance Dashboard</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK:</span>  Snowflake, dbt, Semantic Model, Cortex AI, Streamlit, SQL, Python.
-                </p>
-                <p class="text-gray-300 mb-4">
-					An end-to-end data pipeline that transforms construction permit filings into operational insights, built on Snowflake using dbt with a medallion architecture. The project includes a Cortex Analyst semantic layer that lets users ask questions like "which borough has the most at-risk jobs?" in plain English and get instant answers. The interactive dashboard covering pipeline stages, cost analysis and an at-risk project tracker is deployed live on Streamlit Cloud.
-                </p>
-                
-                <a href="https://github.com/mukulsagvekar/job-site-performance" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-				<a href="https://job-site-performance-5fkmdc7wnatvrecrzht5rk.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
-            </div>
-			
-			<!-- Project 3 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder -->
-                <img src="mobilityIQ.png" 
-                     alt="" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">MobilityIQ – Taxi Demand Forecasting & Analytics Platform</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK:</span> AWS Lambda, AWS S3, Snowflake, dbt, Streamlit, SQL, Python, LightGBM model.
-                </p>
-                <p class="text-gray-300 mb-4">
-					An end-to-end taxi demand forecasting and analytics platform built on AWS, Snowflake, and dbt. A LightGBM model predicts hourly trip demand across 263 zones for a 7-day horizon using lag, rolling, and calendar features extracted from 4.4M+ trip records. The platform extends beyond forecasting with a Snowflake Cortex Analyst semantic layer, letting users query demand, revenue, and seasonality data in plain English through a Streamlit dashboard.
-                </p>
-
-                <a href="https://github.com/mukulsagvekar/nyc-taxi-demand-forecast" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-				<a href="https://nyc-taxi-demand-forecast-happzg759c7qzkbmfvruuyf.streamlit.app/" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
-            </div>
-			
-            <!-- Project 4 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-xl border-t-4 border-accent-cyan/70 hover:shadow-cyan-500/20 transition-shadow duration-300">
-                <!-- Project Image Placeholder -->
-                <img src="nyc-taxi-data-arch.png" 
-                     alt="Project Titan architecture diagram" 
-                     class="w-full h-auto object-cover rounded-lg mb-4 border border-gray-700 shadow-md">
-
-                <h4 class="text-2xl font-bold text-white mb-2">NYC Taxi Data Analysis</h4>
-                <p class="text-sm text-gray-400 mb-4 font-mono">
-                    <span class="text-accent-cyan">STACK:</span> AWS Lambda, AWS S3, Snowflake, dbt, Tableau, SQL, Python.
-                </p>
-                <p class="text-gray-300 mb-4">
-					Architected a snowflake schema data model and built end-to-end data pipeline to analyze 3.1M NYC Taxi trips, delivering dashboards for trip demand forecasting and fare insights.
-                </p>
-
-                <a href="https://github.com/mukulsagvekar/nyc-taxi" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Repository &rarr;</a>
-				<a href="https://public.tableau.com/app/profile/mukul6401/viz/NYCTaxiDataAnalysis_17004981471090/Dashboard1" class="text-cyan-400 hover:text-cyan-300 text-sm ml-4 inline-block align-middle">View Dashboard &rarr;</a>
-            </div>
-
-            
-        </section>
-
-        <!-- 2. EXPERIENCE -->
-        <section id="experience" class="pt-8 border-t border-gray-800">
-            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Professional Experience</h3>
-
-            <!-- Job 1 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition-shadow duration-300 border-l-4 border-cyan-500">
-                <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Aug 2023 — Dec 2024</p>
-                <h4 class="text-xl font-semibold text-white">Data Engineer</h4>
-                <p class="text-accent-cyan mb-4">Happiest Minds, India</p>
-				<p>Worked on large-scale data engineering projects across retail and digital engagement domains. Designed normalized and dimensional data models for advanced analytics and reporting. Built and maintained ELT pipelines integrating data from 8+ sources. Developed serverless, near real-time pipelines for traffic and engagement data, improving insights and automated customer journey reports.</p>
-            </div>
-
-            <!-- Job 2 -->
-            <div class="mb-10 p-6 bg-gray-800 rounded-xl shadow-lg hover:shadow-cyan-500/30 transition-shadow duration-300 border-l-4 border-cyan-500">
-                <p class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-1">Jan 2021 — Aug 2023</p>
-                <h4 class="text-xl font-semibold text-white">Data Engineer</h4>
-                <p class="text-accent-cyan mb-4">Accenture, India</p>
-                <p>As a data engineer, successfully led migration from AWS to Snowflake. Designed, developed and maintained scalable data pipelines using Jenkins, AWS services and Snowflake following best practices. Collaborated with cross-functional teams to develop a POC. Following Agile methodology for development.</p>
-            </div>
-        </section>
-
-
-        <!-- 5. EXTRA-CURRICULAR ACTIVITIES (Updated image size and shape) -->
-        <section id="activities" class="pt-8 border-t border-gray-800">
-            <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Extra-Curricular Activities And Community Impact</h3>
-            <div class="space-y-6">
-                <!-- Activity 1 -->
-                <div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
-                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
-                    <img src="EOM.jpeg" 
-                         alt="Mentorship Icon" 
-                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
-                    
-                    <div>
-                        <h4 class="text-xl font-semibold text-white">Facility Lead At Campus Recreation Center</h4>
-                        <p class="text-accent-cyan">Apr 2025 - Present</p>
-                        <p class="text-gray-300 mt-1">
-                            Oversaw the daily operations of the recreation center, assisted students, faculty, and staff with inquiries regarding the center, managing bookings for events.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Activity 2 -->
-                <div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
-                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
-                    <img src="5k.png" 
-                         alt="Club Icon" 
-                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
-
-                    <div>
-                        <h4 class="text-xl font-semibold text-white">2025 UIS Prairie Stars 5K</h4>
-                        <p class="text-accent-cyan">Sept 2025</p>
-                        <p class="text-gray-300 mt-1">
-                            Completed the 5K with a personal best time of 26.27 minutes, achieving 3rd position in my age category, demonstrating my commitment, discipline, and ability to push boundaries.
-                        </p>
-                    </div>
-                </div>
-				
-				<!-- Activity 3 -->
-				<div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
-                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
-                    <img src="aarohan.jpg" 
-                         alt="Club Icon" 
-                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
-
-                    <div>
-                        <h4 class="text-xl font-semibold text-white">MITWPU Aarohan Cultural Fest</h4>
-                        <p class="text-accent-cyan">Feb 2019</p>
-                        <p class="text-gray-300 mt-1">
-                            Organized and coordinated the college cultural festival - MITWPU Aarohan. As a part of core organizing members, lead the sponsorship and publicity team.
-                        </p>
-                    </div>
-                </div>
-				
-				<!-- Activity 4 -->
-				<div class="bg-gray-800 p-4 rounded-xl flex items-start space-x-4 shadow-lg hover:shadow-cyan-500/20 transition-shadow duration-300">
-                    <!-- Image update: w-24 h-24 and rounded-lg for a square frame -->
-                    <img src="run-for-a-cause.jpg" 
-                         alt="Club Icon" 
-                         class="rounded-lg w-24 h-24 object-cover flex-shrink-0 border-0 border-accent-cyan">
-
-                    <div>
-                        <h4 class="text-xl font-semibold text-white">MITWPU Run For A Cause Marathon</h4>
-                        <p class="text-accent-cyan">Jan 2018</p>
-                        <p class="text-gray-300 mt-1">
-                            Organized and coordinated Run for a Cause Marathon, which witnessed more than 700 participants.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 6. CONTACT ME -->
-            <section id="contact" class="pt-8 mb-20 border-t border-gray-800">
-                <h3 class="text-4xl font-bold text-accent-cyan mb-8 border-b-2 border-accent-cyan/50 pb-2">Contact & Connect</h3>
-                <p class="text-lg leading-relaxed mb-8 text-gray-300">
-                    I'm currently seeking challenging Data Engineering roles. Let's connect to discuss how I can contribute to your data infrastructure goals.
-                </p>
-
-                <div class="space-y-4">
-                    <a href="mailto:mukul.sagvekar@gmail.com" class="flex items-center text-white hover:text-accent-cyan transition-colors duration-200 text-lg">
-                        <svg class="w-6 h-6 mr-3 text-accent-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                        mukul.sagvekar@gmail.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/mukulsagvekar/" class="flex items-center text-white hover:text-accent-cyan transition-colors duration-200 text-lg">
-                        <svg class="w-6 h-6 mr-3 text-accent-cyan" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.51-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        mukulsagvekar
-                    </a>
-                </div>
-            </section>
-
-            <footer class="text-center text-gray-600 text-sm py-8 border-t border-gray-800">
-                <p>Designed with a focus on data clarity and structure.</p>
-            </footer>
+  <!-- HERO -->
+  <header>
+    <div class="hero">
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        Open to opportunities
+      </div>
+      <div class="avatar-ring">
+        <img src="profilepic.png" alt="Mukul Sagvekar">
+      </div>
+      <h1><strong>Mukul</strong> Sagvekar</h1>
+      <p class="hero-role">// data engineer · 4+ years experience</p>
+      <p class="hero-desc">Building scalable pipelines, semantic layers and RAG systems that make data reliable, queryable in plain English and genuinely useful to the teams who depend on it.</p>
+      <div class="hero-actions">
+        <a href="mailto:mukul.sagvekar@gmail.com" class="btn btn-primary">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          Get in touch
+        </a>
+        <a href="https://github.com/mukulsagvekar" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/mukul-sagvekar" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+      </div>
     </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-head">
+      <p class="section-eyebrow">01 / Background</p>
+      <h2 class="section-title">About me</h2>
+    </div>
+    <div class="about-layout">
+      <div>
+        <div class="about-stats">
+          <div class="stat-card"><div class="stat-label">Experience</div><div class="stat-value">4+ years</div></div>
+          <div class="stat-card"><div class="stat-label">Focus</div><div class="stat-value">Data Eng.</div></div>
+          <div class="stat-card"><div class="stat-label">Education</div><div class="stat-value">M.S. Analytics</div></div>
+          <div class="stat-card"><div class="stat-label">Status</div><div class="stat-value green">Open ✦</div></div>
+        </div>
+        <div class="skills-wrap">
+          <span class="skill">SQL</span>
+          <span class="skill">Python</span>
+          <span class="skill">PySpark</span>
+          <span class="skill">Snowflake</span>
+          <span class="skill">dbt</span>
+          <span class="skill">Airflow</span>
+          <span class="skill">AWS</span>
+          <span class="skill">GCP</span>
+          <span class="skill">Kafka</span>
+          <span class="skill">Spark</span>
+          <span class="skill">Streamlit</span>
+          <span class="skill">Tableau</span>
+          <span class="skill">Cortex AI</span>
+          <span class="skill">FAISS</span>
+          <span class="skill">LangChain</span>
+          <span class="skill">RAG</span>
+          <span class="skill">NL-to-SQL</span>
+          <span class="skill">SCD Type 2</span>
+          <span class="skill">Medallion</span>
+          <span class="skill">Docker</span>
+          <span class="skill">Jenkins</span>
+          <span class="skill">CI/CD</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>M.S. Data Analytics with 4+ years engineering the full data lifecycle — from schema design and ingestion strategy through transformation, modeling, and self-serve delivery.</p>
+        <p>My core stack is Snowflake, dbt, Airflow, AWS and GCP. I build pipelines reliable enough to trust at scale: medallion-architecture warehouses, SCD Type 2 tracking and ELT processing 330M+ records/month.</p>
+        <p>Beyond infrastructure, I specialize in making data <em>accessible</em>. I design YAML semantic layers — defining dimensions, metrics and verified queries so business users can query Snowflake in plain English through a Cortex Analyst NL-to-SQL interface, removing the analyst bottleneck entirely.</p>
+        <p>Most recently I've extended into AI: building a multimodal RAG pipeline with dual FAISS indexes (BGE for text, CLIP for images) that retrieves across both modalities and generates cited answers via Groq's LLaMA with zero ingestion API cost.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-head">
+      <p class="section-eyebrow">02 / Work</p>
+      <h2 class="section-title">Data projects</h2>
+    </div>
+    <div class="projects-grid">
+
+      <!-- P1: Multimodal RAG -->
+      <div class="project-row">
+        <div class="project-img-wrap">
+          <img src="multimodal-rag.png" alt="Multimodal RAG pipeline">
+        </div>
+        <div class="project-content">
+          <p class="proj-num">01</p>
+          <h3 class="proj-title">Multimodal RAG</h3>
+          <p class="proj-stack">Python · Streamlit · CLIP · BGE · FAISS · Groq</p>
+          <p class="proj-desc">Upload a PDF and ask questions — dual FAISS indexes (BGE for text, CLIP for images) retrieve across both modalities with score normalization. Groq's llama-3.3-70b generates answers with inline citations and page thumbnails. 25-page doc indexes in under 45 seconds at zero ingestion API cost.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Dual FAISS indexes</span>
+            <span class="proj-tag">Score normalization</span>
+            <span class="proj-tag">Inline citations</span>
+            <span class="proj-tag">Zero ingestion cost</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/mukulsagvekar/multi-modal-rag" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              Repository
+            </a>
+            <a href="https://multi-modal-rag-wqhuxf3aw29t9jpgpa6p5y.streamlit.app/" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live app
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- P2: SiteSignal -->
+      <div class="project-row flip">
+        <div class="project-img-wrap">
+          <img src="job-site-performance-dashboard.png" alt="SiteSignal dashboard">
+        </div>
+        <div class="project-content">
+          <p class="proj-num">02</p>
+          <h3 class="proj-title">SiteSignal</h3>
+          <p class="proj-stack">Snowflake · dbt · Cortex Analyst · Streamlit · SQL · Python</p>
+          <p class="proj-desc">End-to-end pipeline on Snowflake transforming NYC construction permit filings into operational insights via medallion architecture. A YAML semantic model over 475K+ jobs powers a Cortex Analyst NL-to-SQL interface — users ask questions in plain English, analysts get instant governed answers.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">NL-to-SQL</span>
+            <span class="proj-tag">YAML Semantic Model</span>
+            <span class="proj-tag">Medallion Architecture</span>
+            <span class="proj-tag">475K+ jobs</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/mukulsagvekar/job-site-performance" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              Repository
+            </a>
+            <a href="https://job-site-performance-5fkmdc7wnatvrecrzht5rk.streamlit.app/" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- P3: MobilityIQ -->
+      <div class="project-row">
+        <div class="project-img-wrap">
+          <img src="mobilityIQ.png" alt="MobilityIQ forecasting platform">
+        </div>
+        <div class="project-content">
+          <p class="proj-num">03</p>
+          <h3 class="proj-title">MobilityIQ</h3>
+          <p class="proj-stack">AWS Lambda · S3 · Snowflake · dbt · LightGBM · Streamlit</p>
+          <p class="proj-desc">Forecasting platform predicting hourly taxi demand across 263 NYC zones over a 7-day horizon. LightGBM trained on 4.4M+ records. A governed Cortex Analyst semantic model with verified queries enables natural-language analytics on demand, revenue, and seasonality — no SQL required.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">NL-to-SQL</span>
+            <span class="proj-tag">Verified Semantic Queries</span>
+            <span class="proj-tag">LightGBM</span>
+            <span class="proj-tag">4.4M+ records</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/mukulsagvekar/nyc-taxi-demand-forecast" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              Repository
+            </a>
+            <a href="https://nyc-taxi-demand-forecast-happzg759c7qzkbmfvruuyf.streamlit.app/" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- P4: NYC Taxi Analysis -->
+      <div class="project-row flip">
+        <div class="project-img-wrap">
+          <img src="nyc-taxi-data-arch.png" alt="NYC Taxi architecture">
+        </div>
+        <div class="project-content">
+          <p class="proj-num">04</p>
+          <h3 class="proj-title">NYC Taxi Data Analysis</h3>
+          <p class="proj-stack">AWS Lambda · S3 · Snowflake · dbt · Tableau · SQL · Python</p>
+          <p class="proj-desc">Snowflake schema data model and end-to-end pipeline analyzing 3.1M NYC taxi trips. Delivered Tableau dashboards covering trip demand and fare insights across time and geography.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">3.1M trips</span>
+            <span class="proj-tag">Snowflake Schema</span>
+            <span class="proj-tag">Tableau</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/mukulsagvekar/nyc-taxi" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              Repository
+            </a>
+            <a href="https://public.tableau.com/app/profile/mukul6401/viz/NYCTaxiDataAnalysis_17004981471090/Dashboard1" target="_blank" rel="noopener" class="proj-link">
+              <svg stroke-width="1.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Tableau dashboard
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <div class="section-head">
+      <p class="section-eyebrow">03 / Career</p>
+      <h2 class="section-title">Professional experience</h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item">
+        <div class="exp-dot-col"><div class="exp-dot"><div class="exp-dot-inner"></div></div></div>
+        <div>
+          <p class="exp-meta">Aug 2023 — Dec 2024</p>
+          <p class="exp-role">Data Engineer</p>
+          <p class="exp-company">Happiest Minds · Pune, India</p>
+          <p class="exp-desc">Built ELT pipelines using Confluent Kafka, AWS S3 and Snowflake across retail and digital engagement domains, consolidating 8+ sources into dimensional models and achieving near-zero pipeline failures with Airflow orchestration. Automated GA4-based customer journey reports using BigQuery and Cloud Functions and implemented RBAC and data governance across Snowflake environments.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-dot-col"><div class="exp-dot"><div class="exp-dot-inner"></div></div></div>
+        <div>
+          <p class="exp-meta">Jan 2021 — Aug 2023</p>
+          <p class="exp-role">Data Engineer</p>
+          <p class="exp-company">Accenture · Pune, India</p>
+          <p class="exp-desc">Led migration of a legacy data system from AWS to Snowflake. Architected large-scale ELT pipelines processing 330M+ records/month using Medallion Architecture, implemented SCD Type 2 for historical audience tracking and built a Jenkins CI/CD pipeline for efficient large-file ingestion.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ACTIVITIES -->
+  <section class="section" id="activities">
+    <div class="section-head">
+      <p class="section-eyebrow">04 / Beyond work</p>
+      <h2 class="section-title">Activities & community</h2>
+    </div>
+    <div class="activities-grid">
+
+      <div class="activity-card">
+        <div class="activity-img-wrap">
+          <img src="EOM.jpeg" alt="Campus Recreation Center">
+        </div>
+        <div class="activity-body">
+          <p class="activity-date">Apr 2025 – Present</p>
+          <p class="activity-title">Facility Lead — Campus Recreation Center</p>
+          <p class="activity-desc">Oversee daily operations, assist students, faculty, and staff, and manage event bookings for the university recreation center.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-img-wrap">
+          <img src="5k.png" alt="2025 UIS Prairie Stars 5K">
+        </div>
+        <div class="activity-body">
+          <p class="activity-date">Sept 2025</p>
+          <p class="activity-title">2025 UIS Prairie Stars 5K</p>
+          <p class="activity-desc">Completed with a personal best of 26:27, finishing 3rd in my age category.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-img-wrap">
+          <img src="aarohan.jpg" alt="MITWPU Aarohan Cultural Fest">
+        </div>
+        <div class="activity-body">
+          <p class="activity-date">Feb 2019</p>
+          <p class="activity-title">MITWPU Aarohan Cultural Fest</p>
+          <p class="activity-desc">Core organizing member leading the sponsorship and publicity teams for the college cultural festival.</p>
+        </div>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-img-wrap">
+          <img src="run-for-a-cause.jpg" alt="MITWPU Run For A Cause Marathon">
+        </div>
+        <div class="activity-body">
+          <p class="activity-date">Jan 2018</p>
+          <p class="activity-title">MITWPU Run For A Cause Marathon</p>
+          <p class="activity-desc">Organized and coordinated a marathon that drew 700+ participants.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-head">
+      <p class="section-eyebrow">05 / Let's talk</p>
+      <h2 class="section-title">Contact & connect</h2>
+    </div>
+    <div class="contact-layout">
+      <div>
+        <p class="contact-headline">Let's build something <em>reliable</em> together.</p>
+        <p class="contact-sub">Actively seeking data engineering roles and open to conversations about pipelines, semantic layers, RAG systems, and anything in between.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:mukul.sagvekar@gmail.com" class="contact-link">
+          <div class="cl-icon">
+            <svg stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p class="cl-label">Email</p>
+            <p class="cl-value">mukul.sagvekar@gmail.com</p>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/mukulsagvekar/" target="_blank" rel="noopener" class="contact-link">
+          <div class="cl-icon">
+            <svg stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <p class="cl-label">LinkedIn</p>
+            <p class="cl-value">linkedin.com/in/mukulsagvekar</p>
+          </div>
+        </a>
+        <a href="https://github.com/mukulsagvekar" target="_blank" rel="noopener" class="contact-link">
+          <div class="cl-icon">
+            <svg stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </div>
+          <div>
+            <p class="cl-label">GitHub</p>
+            <p class="cl-value">github.com/mukulsagvekar</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>mukul.sagvekar · data engineer · 2025</span>
+</footer>
 
 </body>
 </html>
